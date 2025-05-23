@@ -4,9 +4,8 @@
 
 <body class="d-flex flex-column min-vh-100">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<?= $title = 'tarefas' ?>
-<div class="container">
-    <!-- Formulário de Criação -->
+<?php $title = 'tarefas' //por algum motivo isso nao funcionou, realmente nao sei porque?>
+<div class="flex-fill container">
     <form id="taskForm">
         <input type="text" id="title" placeholder="Título" required>
         <select id="prioridade" required>
@@ -18,10 +17,8 @@
         <button type="submit">Adicionar Tarefa</button>
     </form>
 
-    <!-- Tabela de Tarefas (Leitura) -->
     <div id="tasksTable"></div>
 
-    <!-- Modal de Edição (Oculto) -->
     <div id="editModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc;">
         <h3>Editar Tarefa</h3>
         <form id="editForm">
@@ -41,10 +38,8 @@
 
 <script>
 $(document).ready(function() {
-    // Carregar tarefas ao iniciar
     loadTasks();
 
-    // Criar Tarefa
     $('#taskForm').submit(function(e) {
         e.preventDefault();
         const formData = {
@@ -71,7 +66,6 @@ $(document).ready(function() {
         });
     });
 
-    // Submit da Edição (Modal)
     $('#editForm').submit(function(e) {
         e.preventDefault();
         const formData = {
@@ -100,7 +94,6 @@ $(document).ready(function() {
     });
 });
 
-// Função para Carregar Tarefas (READ)
 function loadTasks() {
     $.ajax({
         url: 'ajax/read_tasks.php',
@@ -131,7 +124,6 @@ function loadTasks() {
     });
 }
 
-// Função para Excluir Tarefa (DELETE)
 function deleteTask(id) {
     if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
         $.ajax({
@@ -150,7 +142,6 @@ function deleteTask(id) {
     }
 }
 
-// Função para Editar Tarefa (UPDATE)
 function editTask(id) {
     $.ajax({
         url: 'ajax/get_task.php',
